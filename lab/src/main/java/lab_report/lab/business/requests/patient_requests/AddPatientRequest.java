@@ -1,4 +1,4 @@
-package lab_report.lab.business.requests.laborabt_requests;
+package lab_report.lab.business.requests.patient_requests;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddLaborantRequest {
+public class AddPatientRequest {
 	
 	@NotBlank(message = ValidationConstants.notNull)
 	@Length(min = 3,message = PersonValidationConstants.firstNameLength)
@@ -32,6 +32,10 @@ public class AddLaborantRequest {
 	@Email(regexp = ProjectConstants.emailRegex)
 	@NotBlank(message = ValidationConstants.notNull)
 	private String email;
+	
+	@NotBlank(message = ValidationConstants.notNull)
+	@Length(min = 11,max = 11,message = PersonValidationConstants.identityNumberLength)
+	private String identityNumber;
 	
 	@NotBlank(message = ValidationConstants.notNull)
 	@Length(min = 3,message = PersonValidationConstants.passwordLength)

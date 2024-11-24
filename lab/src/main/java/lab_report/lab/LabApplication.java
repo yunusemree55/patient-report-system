@@ -1,6 +1,7 @@
 package lab_report.lab;
 
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import lab_report.lab.core.utilities.constants.ExceptionConstants;
 import lab_report.lab.core.utilities.exceptions.BusinessException;
 import lab_report.lab.core.utilities.exceptions.ProblemDetail;
 import lab_report.lab.core.utilities.exceptions.ValidationProblemDetail;
@@ -41,7 +43,7 @@ public class LabApplication {
 	public ProblemDetail methodArgumentNotValidException(MethodArgumentNotValidException methodArgumentValidException) {
 		
 		ValidationProblemDetail validationProblemDetail = new ValidationProblemDetail();
-		validationProblemDetail.setMessage("Validation error occurred");
+		validationProblemDetail.setMessage(ExceptionConstants.validationExceptionMessage);
 		
 		validationProblemDetail.setErrors(new HashMap<String, String>());
 		
@@ -52,6 +54,17 @@ public class LabApplication {
 		}
 		
 		return validationProblemDetail;
+		
+	}
+	
+	@ExceptionHandler
+	public ProblemDetail noSuchElementException(NoSuchElementException noSuchElementException) {
+		
+		ProblemDetail problemDetail = new ProblemDetail();
+		
+		problemDetail.setMessage(ExceptionConstants.noSuchElementExceptionMessage);
+		
+		return problemDetail;
 		
 	}
 

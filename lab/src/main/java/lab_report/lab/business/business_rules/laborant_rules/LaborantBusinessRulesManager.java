@@ -1,22 +1,14 @@
 package lab_report.lab.business.business_rules.laborant_rules;
 
+
 import org.springframework.stereotype.Service;
 
-import lab_report.lab.core.utilities.exceptions.BusinessException;
+import lab_report.lab.business.abstracts.LaborantService;
+import lab_report.lab.business.business_rules.person_rules.PersonBusinessRulesManager;
 
 @Service
-public class LaborantBusinessRulesManager implements LaborantBusinessRulesService{
-
-	@Override
-	public void checkPasswordFieldsIfMatches(String password, String confirmPassword) {
-		
-		boolean isMatches = password.contains(confirmPassword);
-		
-		if(!isMatches) {
-			
-			throw new BusinessException("Passwords are not matched");
-		}
-		
-	}
+public class LaborantBusinessRulesManager extends PersonBusinessRulesManager<LaborantService> implements LaborantBusinessRulesService {
+	
+	
 
 }

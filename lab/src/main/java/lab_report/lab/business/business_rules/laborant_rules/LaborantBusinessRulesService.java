@@ -1,7 +1,9 @@
 package lab_report.lab.business.business_rules.laborant_rules;
 
-public interface LaborantBusinessRulesService {
+import lab_report.lab.business.business_rules.person_rules.PersonBusinessRulesService;
+
+public interface LaborantBusinessRulesService extends PersonBusinessRulesService {
 	
-	void checkPasswordFieldsIfMatches(String password,String confirmPassword);
+	
 
 }

@@ -2,7 +2,6 @@ package lab_report.lab.entities.concretes;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lab_report.lab.entities.abstracts.Person;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,11 +13,9 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper=false)
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "laborants")
-public class Laborant extends Person<Integer>{
+public class Patient extends Person<Integer>{
 	
-	@Column(name = "hospitalIdentityNumber",unique = true,length = 7)
-	private String hospitalIdentityNumber;
-	 
- 
-} 
+	@Column(name = "identityNumber",unique = true)
+	private String identityNumber;
+
+}

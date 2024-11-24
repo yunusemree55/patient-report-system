@@ -6,18 +6,22 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import jakarta.transaction.Transactional;
-import lab_report.lab.entities.concretes.Laborant;
+import lab_report.lab.entities.concretes.Patient;
 
-public interface LaborantRepository extends JpaRepository<Laborant, Integer>,PersonRepository<Laborant> {
+public interface PatientRepository extends JpaRepository<Patient, Integer>, PersonRepository<Patient>{
+	
 	
 	@Modifying
 	@Transactional
-	@Query("UPDATE Laborant l SET l.username = :username, l.updatedAt = CURRENT_TIMESTAMP WHERE l.id = :id")
+	@Query("UPDATE Patient p SET p.username = :username, p.updatedAt = CURRENT_TIMESTAMP WHERE p.id = :id")
 	void updateUsername(@Param(value = "id") int id,@Param(value = "username") String username);
 	
 	@Modifying
 	@Transactional
-	@Query("UPDATE Laborant l SET l.password = :password ,l.updatedAt = CURRENT_TIMESTAMP WHERE l.id = :id")
+	@Query("UPDATE Patient p SET p.password = :password ,p.updatedAt = CURRENT_TIMESTAMP WHERE p.id = :id")
 	void updatePassword(@Param(value = "id") int id, @Param(value = "password") String password);
 
+	boolean existsByIdentityNumber(String identityNumber);
+
 }
+ 
