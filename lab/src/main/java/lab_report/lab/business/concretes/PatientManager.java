@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import lab_report.lab.business.abstracts.PatientService;
+import lab_report.lab.business.abstracts.PersonMailSenderService;
 import lab_report.lab.business.business_rules.patient_rules.PatientBusinessRulesService;
 import lab_report.lab.business.requests.patient_requests.AddPatientRequest;
 import lab_report.lab.business.requests.patient_requests.UpdatePatientPasswordRequest;
@@ -26,6 +27,7 @@ public class PatientManager implements PatientService{
 	private ModelMapperService modelMapperService;
 	private PatientBusinessRulesService patientBusinessRulesService;
 	private PasswordEncoderService passwordEncoderService;
+	private PersonMailSenderService personMailSenderService;
 	
 	@Override
 	public List<GetAllPatientResponse> getAll() {
@@ -41,7 +43,6 @@ public class PatientManager implements PatientService{
 		Patient target = patientRepository.findById(id).orElseThrow();
 		
 		GetPatientResponse patientResponse = modelMapperService.forResponse().map(target, GetPatientResponse.class);
-		
 
 		return patientResponse;
 	}
@@ -63,6 +64,8 @@ public class PatientManager implements PatientService{
 		
 		
 		patientRepository.save(patient);
+		
+		personMailSenderService.accountCreatedMessage(patient.getEmail());
 		
 	}
 

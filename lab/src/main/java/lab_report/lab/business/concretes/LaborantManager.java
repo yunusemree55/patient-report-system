@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import lab_report.lab.business.abstracts.LaborantService;
+import lab_report.lab.business.abstracts.PersonMailSenderService;
 import lab_report.lab.business.business_rules.laborant_rules.LaborantBusinessRulesService;
 import lab_report.lab.business.requests.laborabt_requests.AddLaborantRequest;
 import lab_report.lab.business.requests.laborabt_requests.UpdateLaborantPasswordRequest;
@@ -27,6 +28,7 @@ public class LaborantManager implements LaborantService {
 	private ModelMapperService modelMapperService;
 	private LaborantBusinessRulesService laborantBusinessRulesService;
 	private PasswordEncoderService passwordEncoderService;
+	private PersonMailSenderService personMailSenderService;
 	
 	
 
@@ -65,6 +67,8 @@ public class LaborantManager implements LaborantService {
 		laborant.setPassword(encodedPassword);
 
 		laborantRepository.save(laborant);
+		
+		personMailSenderService.accountCreatedMessage(laborant.getEmail());
 
 	}
 
