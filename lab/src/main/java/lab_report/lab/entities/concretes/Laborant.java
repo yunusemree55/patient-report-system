@@ -1,7 +1,10 @@
 package lab_report.lab.entities.concretes;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lab_report.lab.entities.abstracts.Person;
 import lombok.AllArgsConstructor;
@@ -20,5 +23,6 @@ public class Laborant extends Person<Integer>{
 	@Column(name = "hospitalIdentityNumber",unique = true,length = 7)
 	private String hospitalIdentityNumber;
 	 
- 
+	@OneToMany(mappedBy = "laborant")
+	private List<Report> reports;
 } 
