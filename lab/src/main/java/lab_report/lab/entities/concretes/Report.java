@@ -1,9 +1,13 @@
 package lab_report.lab.entities.concretes;
 
+import java.util.UUID;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lab_report.lab.core.entities.MyEntity;
 import lombok.AllArgsConstructor;
@@ -20,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class Report extends MyEntity<Integer>{
 	
 	@Column(name = "documentId",unique = true)
-	private String documentId;
+	private UUID documentId;
 	
 	@Column(name = "diagnosisTitle")
 	private String diagnosisTitle;
@@ -35,6 +39,9 @@ public class Report extends MyEntity<Integer>{
 	@ManyToOne
 	@JoinColumn(name = "patientId")
 	private Patient patient;
+	
+	@OneToOne(mappedBy = "report",cascade = CascadeType.ALL)
+	private Photo photo;
 	
 
 }

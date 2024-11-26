@@ -17,8 +17,8 @@ import lab_report.lab.core.utilities.exceptions.BusinessException;
 import lab_report.lab.core.utilities.exceptions.ProblemDetail;
 import lab_report.lab.core.utilities.exceptions.ValidationProblemDetail;
 
-@SpringBootApplication
 @RestControllerAdvice
+@SpringBootApplication
 public class LabApplication {
 
 	public static void main(String[] args) {

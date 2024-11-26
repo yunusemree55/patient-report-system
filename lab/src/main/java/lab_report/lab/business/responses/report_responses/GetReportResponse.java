@@ -18,9 +18,11 @@ public class GetReportResponse {
 	private String laborantLastName;
 	private String patientFirstName;
 	private String patientLastName;
+	private String documentId;
 	private String patientIdentityNumber;
 	private String diagnosisTitle;
 	private String description;
+	private String src;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime createdAt;

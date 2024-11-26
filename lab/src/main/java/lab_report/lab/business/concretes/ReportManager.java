@@ -1,12 +1,14 @@
 package lab_report.lab.business.concretes;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import lab_report.lab.business.abstracts.ReportService;
 import lab_report.lab.business.requests.report_requests.AddReportRequest;
+import lab_report.lab.business.requests.report_requests.UpdateReportTitleAndDescriptionRequest;
 import lab_report.lab.business.responses.report_responses.GetAllReportResponse;
 import lab_report.lab.business.responses.report_responses.GetReportResponse;
 import lab_report.lab.core.utilities.mappers.model_mapper.ModelMapperService;
@@ -45,8 +47,31 @@ public class ReportManager implements ReportService{
 	public void add(AddReportRequest addReportRequest) {
 		
 		Report report = modelMapperService.forRequest().map(addReportRequest, Report.class);
+		report.setDocumentId(generateUuidForReport());
 		
 		reportRepository.save(report);
+		
+	}
+	
+	private UUID generateUuidForReport() {
+		
+		return UUID.randomUUID();
+	}
+
+	@Override
+	public void updateTitleAndDescription(
+			UpdateReportTitleAndDescriptionRequest updateReportTitleAndDescriptionRequest) {
+		
+		reportRepository.updateTitleAndDescription(updateReportTitleAndDescriptionRequest.getId(), 
+				updateReportTitleAndDescriptionRequest.getDiagnosisTitle(), 
+				updateReportTitleAndDescriptionRequest.getDescription());
+		
+	}
+
+	@Override
+	public void delete(int id) {
+		
+		reportRepository.deleteById(id);
 		
 	}
 
