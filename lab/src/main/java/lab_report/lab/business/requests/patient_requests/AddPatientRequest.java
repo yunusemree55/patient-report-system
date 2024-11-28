@@ -17,31 +17,31 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AddPatientRequest {
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	@Length(min = 3,message = PersonValidationConstants.firstNameLength)
 	private String firstName;
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	@Length(min = 2,message = PersonValidationConstants.lastNameLength)
 	private String lastName;
 	
-	@NotNull(message = ValidationConstants.notNull)
+	@NotNull(message = ValidationConstants.notBlank)
 	@Length(min = 3,message = PersonValidationConstants.usernameLength)
 	private String username;
 	
 	@Email(regexp = ProjectConstants.emailRegex)
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	private String email;
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	@Length(min = 11,max = 11,message = PersonValidationConstants.identityNumberLength)
 	private String identityNumber;
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	@Length(min = 3,message = PersonValidationConstants.passwordLength)
 	private String password;
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	private String confirmPassword;
 
 }

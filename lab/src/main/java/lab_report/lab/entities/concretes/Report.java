@@ -43,5 +43,8 @@ public class Report extends MyEntity<Integer>{
 	@OneToOne(mappedBy = "report",cascade = CascadeType.ALL)
 	private Photo photo;
 	
+	@ManyToOne()
+	@JoinColumn(name = "statusId")
+	private Status status;
 
 }

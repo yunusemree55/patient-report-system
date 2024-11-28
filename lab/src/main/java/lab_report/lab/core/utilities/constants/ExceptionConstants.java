@@ -8,6 +8,7 @@ public class ExceptionConstants {
 	public static final String emailExistsExceptionMessage = "This email is already exists";
 	public static final String usernameExistsExceptionMessage = "This username is already exists";
 	public static final String identityNumberExistsException = "This identity number is already exists";
+	public static final String statusExistsException = "Status name is already exists";
 	
 	
 }

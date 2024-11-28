@@ -23,6 +23,7 @@ public class GetReportResponse {
 	private String diagnosisTitle;
 	private String description;
 	private String src;
+	private String statusName;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime createdAt;

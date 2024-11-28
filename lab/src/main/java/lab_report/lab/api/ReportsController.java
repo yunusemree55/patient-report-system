@@ -32,6 +32,24 @@ public class ReportsController {
 		return reportService.getAll();
 	}
 	
+	@GetMapping("/sorted-by-date")
+	public List<GetAllReportResponse> getAllByCreatedTime(){
+		
+		return reportService.getAllByCreatedTime();
+	}
+	
+	@GetMapping("/active-reports")
+	public List<GetAllReportResponse> getAllActiveReports(){
+		
+		return reportService.getAllActiveReports();
+	}
+	
+	@GetMapping("/passive-reports")
+	public List<GetAllReportResponse> getAllPassiveReports(){
+		
+		return reportService.getAllPassiveReports();
+	}
+	
 	@GetMapping("/{id}")
 	public GetReportResponse getById(@PathVariable int id) {
 		

@@ -1,4 +1,4 @@
-package lab_report.lab.business.requests.report_requests;
+package lab_report.lab.business.requests.status_requests;
 
 import jakarta.validation.constraints.NotBlank;
 import lab_report.lab.core.utilities.constants.ValidationConstants;
@@ -9,14 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateReportTitleAndDescriptionRequest {
-	
-	private int id;
+public class AddStatusRequest {
 	
 	@NotBlank(message = ValidationConstants.notBlank)
-	private String diagnosisTitle;
-	
-	@NotBlank(message = ValidationConstants.notBlank)
-	private String description;
+	private String name;
 
 }

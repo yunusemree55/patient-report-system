@@ -15,5 +15,6 @@ public class GetLaborantResponse {
 	private String username;
 	private String email;
 	private String hospitalIdentityNumber;
+	private String statusName;
 	
 }

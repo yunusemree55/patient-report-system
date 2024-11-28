@@ -17,27 +17,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AddLaborantRequest {
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	@Length(min = 3,message = PersonValidationConstants.firstNameLength)
 	private String firstName;
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	@Length(min = 2,message = PersonValidationConstants.lastNameLength)
 	private String lastName;
 	
-	@NotNull(message = ValidationConstants.notNull)
+	@NotNull(message = ValidationConstants.notBlank)
 	@Length(min = 3,message = PersonValidationConstants.usernameLength)
 	private String username;
 	
 	@Email(regexp = ProjectConstants.emailRegex)
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	private String email;
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	@Length(min = 3,message = PersonValidationConstants.passwordLength)
 	private String password;
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	private String confirmPassword;
 
 }

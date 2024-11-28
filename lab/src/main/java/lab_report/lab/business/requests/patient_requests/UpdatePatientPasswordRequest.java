@@ -16,11 +16,11 @@ public class UpdatePatientPasswordRequest {
 	
 	private int id;
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	@Length(min = 3,message = PersonValidationConstants.passwordLength)
 	private String password;
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	private String confirmPassword;
 	
 }

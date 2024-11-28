@@ -25,5 +25,8 @@ public abstract class Person<T> extends MyEntity<T>{
 	
 	@Column(name = "lastName")
 	private String lastName;
+	
+	
+	
 
 } 

@@ -17,6 +17,7 @@ import lab_report.lab.core.adapters.spring_security_crypto.PasswordEncoderServic
 import lab_report.lab.core.utilities.mappers.model_mapper.ModelMapperService;
 import lab_report.lab.data_access.abstracts.PatientRepository;
 import lab_report.lab.entities.concretes.Patient;
+import lab_report.lab.entities.concretes.Status;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -36,6 +37,15 @@ public class PatientManager implements PatientService{
 				.map(patient -> modelMapperService.forResponse().map(patient, GetAllPatientResponse.class)).collect(Collectors.toList());
 		return patientResponseList;
 	}
+	
+	@Override
+	public List<GetAllPatientResponse> getByFirstNameAndLastName(String firstName, String lastName) {
+
+		List<GetAllPatientResponse> patientResponseList = patientRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName)
+				.stream().map(patient -> modelMapperService.forResponse().map(patient, GetAllPatientResponse.class)).collect(Collectors.toList());
+		
+		return patientResponseList;
+	}
 
 	@Override
 	public GetPatientResponse getById(int id) {
@@ -47,6 +57,18 @@ public class PatientManager implements PatientService{
 		return patientResponse;
 	}
 	
+	@Override
+	public GetPatientResponse getByIdentityNumber(String identityNumber) {
+		
+		Patient target = patientRepository.findByIdentityNumber(identityNumber).orElseThrow();
+		
+		GetPatientResponse patientResponse = modelMapperService.forResponse().map(target, GetPatientResponse.class);
+
+		return patientResponse;
+
+	}
+
+	
 	
 	@Override
 	public void add(AddPatientRequest addPatientRequest) {
@@ -57,6 +79,8 @@ public class PatientManager implements PatientService{
 		patientBusinessRulesService.checkPasswordFieldsIfMatches(addPatientRequest.getPassword(), addPatientRequest.getConfirmPassword());
 		
 		Patient patient = modelMapperService.forRequest().map(addPatientRequest, Patient.class);
+		patient.setStatus(new Status());
+		patient.getStatus().setId(1);
 		
 		String encodedPassword = passwordEncoderService.encodePassword(patient.getPassword());
 		
@@ -115,6 +139,9 @@ public class PatientManager implements PatientService{
 		return isExists;
 		
 	}
+
+	
+	
 	
 
 }

@@ -16,7 +16,7 @@ public class UpdateLaborantUsernameRequest {
 	
 private int id;
 	
-	@NotNull(message = ValidationConstants.notNull)
+	@NotNull(message = ValidationConstants.notBlank)
 	@Length(min = 3,message = PersonValidationConstants.usernameLength)
 	private String username;
 

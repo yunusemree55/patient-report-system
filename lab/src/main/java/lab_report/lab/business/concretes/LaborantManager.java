@@ -18,6 +18,7 @@ import lab_report.lab.core.adapters.spring_security_crypto.PasswordEncoderServic
 import lab_report.lab.core.utilities.mappers.model_mapper.ModelMapperService;
 import lab_report.lab.data_access.abstracts.LaborantRepository;
 import lab_report.lab.entities.concretes.Laborant;
+import lab_report.lab.entities.concretes.Status;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -42,6 +43,16 @@ public class LaborantManager implements LaborantService {
 	}
 	
 	@Override
+	public List<GetAllLaborantResponse> getByFirstNameAndLastName(String firstName, String lastName) {
+		
+		List<GetAllLaborantResponse> laborantResponseList = laborantRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName)
+				.stream().map(laborant -> modelMapperService.forResponse().map(laborant, GetAllLaborantResponse.class)).collect(Collectors.toList());
+		
+		return laborantResponseList;
+		
+	}
+	
+	@Override
 	public GetLaborantResponse getById(int id) {
 		
 		Laborant target = laborantRepository.findById(id).orElseThrow();
@@ -61,10 +72,11 @@ public class LaborantManager implements LaborantService {
 		
 		Laborant laborant = modelMapperService.forRequest().map(addLaborantRequest, Laborant.class);
 		
-		laborant.setHospitalIdentityNumber(generateRandomNumber());
+		laborant.setStatus(new Status());
+		laborant.getStatus().setId(1);
 		
-		String encodedPassword = passwordEncoderService.encodePassword(laborant.getPassword());
-		laborant.setPassword(encodedPassword);
+		laborant.setHospitalIdentityNumber(generateRandomNumber());
+		laborant.setPassword(encodePassword(laborant.getPassword()));
 
 		laborantRepository.save(laborant);
 		
@@ -88,9 +100,8 @@ public class LaborantManager implements LaborantService {
 		
 		laborantBusinessRulesService.checkPasswordFieldsIfMatches(updateLaborantPasswordRequest.getPassword(), updateLaborantPasswordRequest.getConfirmPassword());
 		
-		String encodedNewPassword = passwordEncoderService.encodePassword(updateLaborantPasswordRequest.getPassword());
 		
-		laborantRepository.updatePassword(updateLaborantPasswordRequest.getId(),encodedNewPassword );
+		laborantRepository.updatePassword(updateLaborantPasswordRequest.getId(),encodePassword(updateLaborantPasswordRequest.getPassword()));
 	}
 
 	@Override
@@ -116,6 +127,13 @@ public class LaborantManager implements LaborantService {
 		
 		return Integer.toString(randomNumber);
 	}
+	
+	private String encodePassword(String password) {
+		
+		return passwordEncoderService.encodePassword(password);
+	}
+
+	
 	
 	
 }

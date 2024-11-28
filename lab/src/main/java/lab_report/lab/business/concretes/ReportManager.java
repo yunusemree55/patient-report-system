@@ -14,6 +14,7 @@ import lab_report.lab.business.responses.report_responses.GetReportResponse;
 import lab_report.lab.core.utilities.mappers.model_mapper.ModelMapperService;
 import lab_report.lab.data_access.abstracts.ReportRepository;
 import lab_report.lab.entities.concretes.Report;
+import lab_report.lab.entities.concretes.Status;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -27,6 +28,34 @@ public class ReportManager implements ReportService{
 	public List<GetAllReportResponse> getAll() {
 		
 		List<GetAllReportResponse> reportResponseList = reportRepository.findAll().stream()
+				.map(report -> modelMapperService.forResponse().map(report, GetAllReportResponse.class)).collect(Collectors.toList());
+		
+		return reportResponseList;
+	}
+	
+	@Override
+	public List<GetAllReportResponse> getAllByCreatedTime() {
+
+		List<GetAllReportResponse> reportResponseList = reportRepository.findByOrderByCreatedAtDesc().stream()
+				.map(report -> modelMapperService.forResponse().map(report, GetAllReportResponse.class)).collect(Collectors.toList());
+		 
+		
+		return reportResponseList;
+	}
+	
+	@Override
+	public List<GetAllReportResponse> getAllActiveReports() {
+		
+		List<GetAllReportResponse> reportResponseList = reportRepository.findReportsByStatusIdEquals(1).stream()
+				.map(report -> modelMapperService.forResponse().map(report, GetAllReportResponse.class)).collect(Collectors.toList());
+		
+		return reportResponseList;
+	}
+
+	@Override
+	public List<GetAllReportResponse> getAllPassiveReports() {
+		
+		List<GetAllReportResponse> reportResponseList = reportRepository.findReportsByStatusIdEquals(2).stream()
 				.map(report -> modelMapperService.forResponse().map(report, GetAllReportResponse.class)).collect(Collectors.toList());
 		
 		return reportResponseList;
@@ -48,14 +77,11 @@ public class ReportManager implements ReportService{
 		
 		Report report = modelMapperService.forRequest().map(addReportRequest, Report.class);
 		report.setDocumentId(generateUuidForReport());
+		report.setStatus(new Status());
+		report.getStatus().setId(1);
 		
 		reportRepository.save(report);
 		
-	}
-	
-	private UUID generateUuidForReport() {
-		
-		return UUID.randomUUID();
 	}
 
 	@Override
@@ -71,8 +97,17 @@ public class ReportManager implements ReportService{
 	@Override
 	public void delete(int id) {
 		
-		reportRepository.deleteById(id);
+		reportRepository.deleteReportById(id);
 		
 	}
+	
+	private UUID generateUuidForReport() {
+		
+		return UUID.randomUUID();
+	}
+
+	
+
+	
 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lab_report.lab.entities.abstracts.Person;
@@ -25,4 +27,8 @@ public class Laborant extends Person<Integer>{
 	 
 	@OneToMany(mappedBy = "laborant")
 	private List<Report> reports;
+	
+	@ManyToOne()
+	@JoinColumn(name = "statusId")
+	private Status status;
 } 

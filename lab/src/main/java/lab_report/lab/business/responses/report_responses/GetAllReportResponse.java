@@ -21,6 +21,7 @@ public class GetAllReportResponse {
 	private String patientIdentityNumber;
 	private String diagnosisTitle;
 	private String description;
+	private String statusName;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime createdAt;

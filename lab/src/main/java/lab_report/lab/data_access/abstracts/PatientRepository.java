@@ -1,5 +1,7 @@
 package lab_report.lab.data_access.abstracts;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,6 +12,7 @@ import lab_report.lab.entities.concretes.Patient;
 
 public interface PatientRepository extends JpaRepository<Patient, Integer>, PersonRepository<Patient>{
 	
+	Optional<Patient> findByIdentityNumber(String identityNumber);
 	
 	@Modifying
 	@Transactional

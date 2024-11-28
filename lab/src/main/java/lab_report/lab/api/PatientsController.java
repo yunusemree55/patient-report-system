@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
@@ -32,10 +33,23 @@ public class PatientsController {
 		return patientService.getAll();
 	}
 	
+	@GetMapping("/name")
+	public List<GetAllPatientResponse> getByFirstNameAndLastName(@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName){
+		
+		return patientService.getByFirstNameAndLastName(firstName, lastName);
+	}
+	
 	@GetMapping("/{id}")
 	public GetPatientResponse getById(@PathVariable int id) {
 		
 		return patientService.getById(id);
+	}
+	
+	@GetMapping("/identity-number/{identityNumber}")
+	public GetPatientResponse getByIdentityNumber(@PathVariable String identityNumber) {
+		
+		return patientService.getByIdentityNumber(identityNumber);
+	
 	}
 	
 	@PostMapping("/add")

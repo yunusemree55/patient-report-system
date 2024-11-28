@@ -14,10 +14,10 @@ public class AddReportRequest {
 	private int laborantId;
 	private int patientId;
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	private String diagnosisTitle;
 	
-	@NotBlank(message = ValidationConstants.notNull)
+	@NotBlank(message = ValidationConstants.notBlank)
 	private String description;
 
 }
