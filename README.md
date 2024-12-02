@@ -65,13 +65,13 @@ The proposed Laboratory Reporting System is built using Spring Boot. This will b
    ```
 3. Install Dependencies
 
-      ```sh
+   ```sh
    mvn clean install
    ```
 
 4. Create Database
   
-    ```sql
+     ```sql
     CREATE DATABASE labdemo;
     ```
 
@@ -102,6 +102,7 @@ The proposed Laboratory Reporting System is built using Spring Boot. This will b
 - **ModelMapper**: A tool that mapping objects.
 - **Spring Security Crypto**: Security dependency for encryption operations.
 - **ImageKit Java SDK**: To upload and manage images.
+- **Spring Boot Starter Mail**: Spring Boot starter that provides the essential configuration for email sending.
 
 ## API Usage
 
