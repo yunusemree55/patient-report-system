@@ -21,7 +21,7 @@ import lab_report.lab.entities.concretes.Status;
 import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor
+@AllArgsConstructor	
 public class PatientManager implements PatientService{
 		
 	private PatientRepository patientRepository;
@@ -29,6 +29,8 @@ public class PatientManager implements PatientService{
 	private PatientBusinessRulesService patientBusinessRulesService;
 	private PasswordEncoderService passwordEncoderService;
 	private PersonMailSenderService personMailSenderService;
+	
+	
 	
 	@Override
 	public List<GetAllPatientResponse> getAll() {
@@ -139,6 +141,8 @@ public class PatientManager implements PatientService{
 		return isExists;
 		
 	}
+
+	
 
 	
 	

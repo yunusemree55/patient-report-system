@@ -31,7 +31,6 @@ public class LaborantManager implements LaborantService {
 	private PasswordEncoderService passwordEncoderService;
 	private PersonMailSenderService personMailSenderService;
 	
-	
 
 	@Override
 	public List<GetAllLaborantResponse> getAll() {
